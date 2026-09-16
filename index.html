@@ -89,6 +89,7 @@
     .btn--solid:hover { color: var(--color-solid-text); background: var(--color-primary-hover); text-decoration: none; }
     .btn--ghost { color: var(--color-text); background: transparent; border-color: var(--color-border); padding: .45rem .7rem; }
     .btn--ghost:hover { background: var(--color-surface); text-decoration: none; }
+    .button-stack { display: grid; gap: var(--space-2); }
     .hero { padding: var(--space-8) 0 var(--space-7); border-bottom: 1px solid var(--color-border); }
     main section { padding: var(--space-7) 0; border-bottom: 1px solid var(--color-border); }
     .section-head { margin-bottom: var(--space-5); }
@@ -142,13 +143,16 @@
           <p>Browse the available presentation decks.</p>
         </div>
         <div class="grid grid-2">
-          <article class="card">
+          <article class="card" data-notebook-file="lectures/module-2/prompt-and-context-engineering/lecture-1.txt">
             <span class="badge">Module 2 · Lecture 1</span>
             <div class="card__body">
               <h3 class="card__title">Basics of Prompting</h3>
               <p class="card__text">An introduction to prompts, next-token prediction, structured prompting, and in-context learning.</p>
             </div>
-            <a class="btn btn--solid" href="lectures/module-2/prompt-and-context-engineering/lecture-1.html">Open lecture →</a>
+            <div class="button-stack">
+              <a class="btn btn--solid" href="lectures/module-2/prompt-and-context-engineering/lecture-1.html" target="_blank" rel="noopener">Open lecture →</a>
+              <a class="btn btn--ghost notebook-link" href="#" target="_blank" rel="noopener" hidden>Open notebook</a>a>
+            </div>
           </article>
         </div>
       </div>
@@ -178,12 +182,25 @@
     const root = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) root.setAttribute('data-theme', savedTheme);
-    themeToggle.addEventListener('click', () => {
+    if (savedTheme) root.setAttribute('data-theme', savedThem    themeToggle.addEventListener('click', () => {
       const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', nextTheme);
       localStorage.setItem('theme', nextTheme);
     });
-  </script>
+
+    document.querySelectorAll('[data-notebook-file]').forEach(async (card) => {
+      const notebookLink = card.querySelector('.notebook-link');
+      try {
+        const response = await fetch(card.dataset.notebookFile, { cache: 'no-store' });
+        if (!response.ok) return;
+        const notebookUrl = (await response.text()).trim();
+        if (!notebookUrl) return;
+        notebookLink.href = notebookUrl;
+        notebookLink.hidden = false;
+      } catch (error) {
+        // Missing companion files leave the notebook button hidden.
+      }
+    });
+  </script>ipt>
 </body>
 </html>
