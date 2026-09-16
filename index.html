@@ -151,7 +151,7 @@
             </div>
             <div class="button-stack">
               <a class="btn btn--solid" href="lectures/module-2/prompt-and-context-engineering/lecture-1.html" target="_blank" rel="noopener">Open lecture →</a>
-              <a class="btn btn--ghost notebook-link" href="#" target="_blank" rel="noopener" hidden>Open notebook</a>
+              <a class="btn btn--solid notebook-link" href="#" target="_blank" rel="noopener" hidden>Open notebook</a>
             </div>
           </article>
         </div>
@@ -182,7 +182,8 @@
     const root = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) root.setAttribute('data-theme', savedThem    themeToggle.addEventListener('click', () => {
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeToggle.addEventListener('click', () => {
       const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', nextTheme);
       localStorage.setItem('theme', nextTheme);
@@ -201,6 +202,6 @@
         // Missing companion files leave the notebook button hidden.
       }
     });
-  </script>ipt>
+  </script>
 </body>
 </html>
