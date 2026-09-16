@@ -1,30 +1,189 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Intelligent Systems - Lecture Slides</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lecture slides for the Intelligent Systems course.">
+  <meta name="theme-color" content="#1a1d23">
+  <title>Intelligent Systems | Lecture Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-    body { max-width: 50rem; margin: 0 auto; padding: 3rem 1.5rem; line-height: 1.6; }
-    a { color: #2563eb; }
-    li { margin: .75rem 0; }
-    small { color: #6b7280; }
+    :root {
+      --color-bg: #e5e7eb;
+      --color-card: #ffffff;
+      --color-surface: #f6f7f9;
+      --color-surface-2: #eef0f3;
+      --color-text: #1a1d23;
+      --color-text-muted: #5b6472;
+      --color-border: #e3e6ea;
+      --color-solid: #1a1d23;
+      --color-solid-text: #ffffff;
+      --color-primary: #1a1d23;
+      --color-primary-hover: #2f3640;
+      --font-sans: "Source Code Pro", ui-monospace, monospace;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4rem;
+      --container-max: 72rem;
+      --header-height: 4rem;
+      --radius-md: .5rem;
+      --radius-lg: .75rem;
+      --shadow-md: 0 4px 12px rgba(16,24,40,.08);
+      --shadow-lg: 0 12px 32px rgba(16,24,40,.14);
+    }
+    [data-theme="dark"] {
+      --color-bg: #0f1115;
+      --color-card: #0f1115;
+      --color-surface: #171a21;
+      --color-surface-2: #1f232c;
+      --color-text: #e8eaed;
+      --color-text-muted: #9aa3b2;
+      --color-border: #2a2f3a;
+      --color-solid: #e8eaed;
+      --color-solid-text: #0f1115;
+      --color-primary: #e8eaed;
+      --color-primary-hover: #d2d6dc;
+      --shadow-md: 0 4px 12px rgba(0,0,0,.5);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; cursor: pointer; }
+    h1, h2, h3 { line-height: 1.2; font-weight: 700; letter-spacing: -.02em; }
+    h1 { font-size: clamp(2rem, 4vw + 1rem, 3rem); }
+    h2 { font-size: clamp(1.5rem, 3vw + .75rem, 2.25rem); }
+    h3 { font-size: clamp(1.15rem, 2vw + .65rem, 1.5rem); }
+    .container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-4); }
+    .lead { color: var(--color-text-muted); font-size: clamp(1.05rem, 1vw + .9rem, 1.25rem); }
+    .text-muted { color: var(--color-text-muted); }
+    .site-header {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--color-card);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .navbar { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-height); }
+    .navbar__brand { color: var(--color-text); font-size: 1.1rem; font-weight: 700; }
+    .navbar__brand:hover { text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: var(--space-5); list-style: none; padding: 0; }
+    .nav-links a { color: var(--color-text-muted); font-size: .925rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--color-text); text-decoration: none; }
+    .nav-toggle { display: none; color: var(--color-text); background: transparent; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-2); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: var(--radius-md); padding: .65rem 1rem; font-weight: 600; transition: background 150ms ease, color 150ms ease; }
+    .btn--solid { color: var(--color-solid-text); background: var(--color-solid); }
+    .btn--solid:hover { color: var(--color-solid-text); background: var(--color-primary-hover); text-decoration: none; }
+    .btn--ghost { color: var(--color-text); background: transparent; border-color: var(--color-border); padding: .45rem .7rem; }
+    .btn--ghost:hover { background: var(--color-surface); text-decoration: none; }
+    .hero { padding: var(--space-8) 0 var(--space-7); border-bottom: 1px solid var(--color-border); }
+    main section { padding: var(--space-7) 0; border-bottom: 1px solid var(--color-border); }
+    .section-head { margin-bottom: var(--space-5); }
+    .section-head p { color: var(--color-text-muted); }
+    .grid { display: grid; gap: var(--space-5); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+    .card { display: flex; flex-direction: column; gap: var(--space-4); background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: var(--shadow-md); }
+    .card:hover { box-shadow: var(--shadow-lg); }
+    .card__body { flex: 1; }
+    .card__title { margin-bottom: .5rem; }
+    .card__text { color: var(--color-text-muted); }
+    .badge { display: inline-block; width: fit-content; border: 1px solid var(--color-border); border-radius: 9999px; padding: .2rem .6rem; color: var(--color-text-muted); background: var(--color-surface); font-size: .8rem; font-weight: 600; }
+    footer { padding: var(--space-6) 0; color: var(--color-text-muted); font-size: .875rem; }
+    @media (max-width: 47.99rem) {
+      .nav-toggle { display: inline-flex; }
+      .nav-links { position: absolute; top: var(--header-height); left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: var(--space-3); background: var(--color-card); border-bottom: 1px solid var(--color-border); }
+      .nav-links.is-open { display: flex; }
+      .nav-links a, .nav-links li:last-child { display: block; padding: var(--space-3); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Intelligent Systems</h1>
-    <p>Lecture slides</p>
-    <ul>
-      <li>
-        <a href="lectures/module-2/prompt-and-context-engineering/lecture-1.html">
-          Module 2 - Prompt and Context Engineering - Lecture 1
-        </a>
-        <br>
-        <small>Basics of Prompting</small>
-      </li>
-    </ul>
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main navigation">
+        <a class="navbar__brand" href="#top">Intelligent Systems</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" type="button">
+          <span aria-hidden="true">☰</span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#lectures">Lectures</a></li>
+          <li><button class="btn btn--ghost" id="theme-toggle" type="button">Toggle theme</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="container">
+        <h1>Intelligent Systems</h1>
+        <p class="lead" style="margin-top: .75rem;">Lecture slides, demonstrations, and course material.</p>
+      </div>
+    </div>
+
+    <section id="lectures">
+      <div class="container">
+        <div class="section-head">
+          <h2>Lectures</h2>
+          <p>Browse the available presentation decks.</p>
+        </div>
+        <div class="grid grid-2">
+          <article class="card">
+            <span class="badge">Module 2 · Lecture 1</span>
+            <div class="card__body">
+              <h3 class="card__title">Basics of Prompting</h3>
+              <p class="card__text">An introduction to prompts, next-token prediction, structured prompting, and in-context learning.</p>
+            </div>
+            <a class="btn btn--solid" href="lectures/module-2/prompt-and-context-engineering/lecture-1.html">Open lecture →</a>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="container">
+      <p>Intelligent Systems — lecture slides</p>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.tagName === 'A') {
+        navLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
 </body>
 </html>
