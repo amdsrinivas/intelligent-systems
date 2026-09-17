@@ -97,6 +97,7 @@
     .section-head p { color: var(--color-text-muted); }
     .grid { display: grid; gap: var(--space-5); }
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+    .lecture-list { grid-template-columns: 1fr; }
     .card { display: flex; flex-direction: column; gap: var(--space-4); background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: var(--shadow-md); }
     .card:hover { box-shadow: var(--shadow-lg); }
     .card__body { flex: 1; }
@@ -143,7 +144,18 @@
           <h2>Lectures</h2>
           <p>Browse the available presentation decks.</p>
         </div>
-        <div class="grid grid-2">
+        <div class="grid lecture-list">
+          <article class="card" data-notebook-file="lectures/module-2/prompt-and-context-engineering/lecture-2.txt">
+            <span class="badge">Module 2 · Lecture 2</span>
+            <div class="card__body">
+              <h3 class="card__title">Prompt Engineering Best Practices</h3>
+              <p class="card__text">Clear instructions, relevant context, CoT prompting, decomposition, evaluation, and prompt versioning.</p>
+            </div>
+            <div class="button-stack">
+              <a class="btn btn--solid" href="lectures/module-2/prompt-and-context-engineering/lecture-2.html" target="_blank" rel="noopener">Open lecture →</a>
+              <a class="btn btn--solid notebook-link" href="#" target="_blank" rel="noopener" hidden>Open notebook →</a>
+            </div>
+          </article>
           <article class="card" data-notebook-file="lectures/module-2/prompt-and-context-engineering/lecture-1.txt">
             <span class="badge">Module 2 · Lecture 1</span>
             <div class="card__body">
